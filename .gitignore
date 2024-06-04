@@ -1,1 +1,4 @@
 /bin
+/obj/Debug
+/obj/Release
+/obj/Release/net8.0/PCSX2Upscaler.AssemblyInfo.cs
