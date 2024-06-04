@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PCSX2Upscaler")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+efbe66d52cfb0691ada2d509edae505085e63a83")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d338da52246049ff1d42b84d584e9cdc69886158")]
 [assembly: System.Reflection.AssemblyProductAttribute("PCSX2Upscaler")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PCSX2Upscaler")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
