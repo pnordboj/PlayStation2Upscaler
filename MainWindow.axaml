@@ -33,25 +33,24 @@
 	<StackPanel Margin="20">
 		<TextBlock Text="Select the folder containing textures:" Margin="0,0,0,10" FontSize="20"/>
 		<TextBox Name="FolderPathTextBox" IsReadOnly="True" FontSize="16"/>
-		<Button Name="BrowseButton" Content="Browse..." Click="BrowseButton_Click" ToolTip.Tip="Select the folder containing the textures to upscale"/>
-
+		<Button Name="BrowseButton" Content="Browse..." Click="BrowseButton_Click"/>
+		
 		<TextBlock Text="Set output folder:" Margin="0,10,0,1" FontSize="20"/>
 		<TextBox Name="OutputPathTextBox" IsReadOnly="True" FontSize="16"/>
-		<Button Name="OutputBrowseButton" Content="Browse..." Click="OutputBrowseButton_Click" ToolTip.Tip="Select the folder to save the upscaled textures"/>
-
-		<TextBlock Text="Set waifu2x-caffe path:" Margin="0,10,0,1" FontSize="20"/>
+		<Button Name="OutputBrowseButton" Content="Browse..." Click="OutputBrowseButton_Click"/>
+		
+		<TextBlock Text="Set waifu2x-caffe folder contanining the executable:" Margin="0,10,0,1" FontSize="20"/>
 		<TextBox Name="Waifu2xPathTextBox" IsReadOnly="True" FontSize="16"/>
-		<Button Name="Waifu2xBrowseButton" Content="Browse..." Click="Waifu2xBrowseButton_Click" ToolTip.Tip="Select the waifu2x-caffe executable"/>
-
-		<Button Name="UpscaleButton" Content="Upscale Textures" Click="UpscaleButton_Click" Margin="0,20,0,0" ToolTip.Tip="Start upscaling the textures" IsEnabled="False"/>
-		<Button Name="StopButton" Content="Stop" Click="StopButton_Click" Margin="0,20,0,0" IsEnabled="False" ToolTip.Tip="Stop the upscaling process"/>
-
+		<Button Name="Waifu2xBrowseButton" Content="Browse..." Click="Waifu2xBrowseButton_Click" ToolTip.Tip="Select the folder where the Wifu2x-Caffe executable is located"/>
+		
+		<Button Name="UpscaleButton" Content="Upscale Textures" Click="UpscaleButton_Click" Margin="0,20,0,0"/>
+		<Button Name="StopButton" Content="Stop" Click="StopButton_Click" Margin="0,20,0,0" IsEnabled="False"/>
 		<TextBlock Name="ProgressTextBlock" Text="Processing files: 0/0 0%" FontSize="16" Margin="10,20,10,0"/>
 		<ProgressBar Name="ProgressBar" Minimum="0" Maximum="100"/>
 		<TextBlock Name="StatusTextBlock" Margin="10,20,10,0" FontSize="16"/>
 		<TextBlock Name="StorageTextBlock" Text="Estimated storage required: 0 MB" FontSize="16" Margin="10,10,10,0"/>
 		<TextBlock Name="TimeTextBlock" Text="Estimated time remaining: 00:00:00" FontSize="16" Margin="10,10,10,0"/>
-		<CheckBox Name="ShowTerminalCheckBox" Content="Show Terminal" Checked="ShowTerminalCheckBox_Checked" Unchecked="ShowTerminalCheckBox_Unchecked" FontSize="16" Margin="10,20,10,0" ToolTip.Tip="Show or hide the terminal output"/>
+		<CheckBox Name="ShowTerminalCheckBox" Content="Show Terminal" Checked="ShowTerminalCheckBox_Checked" Unchecked="ShowTerminalCheckBox_Unchecked" FontSize="16" Margin="10,20,10,0"/>
 		<ScrollViewer Name="TerminalScrollViewer" Height="200" IsVisible="False">
 			<TextBox Name="TerminalTextBox" FontSize="14" IsReadOnly="True" Background="#1E1E1E" Foreground="#FFFFFF"/>
 		</ScrollViewer>

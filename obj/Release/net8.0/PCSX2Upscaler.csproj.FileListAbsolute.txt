@@ -1,4 +1,6 @@
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\PCSX2Upscaler.exe
+P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\icon.ico
+P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\PCSX2Upscaler.dll.config
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\PCSX2Upscaler.deps.json
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\PCSX2Upscaler.runtimeconfig.json
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\PCSX2Upscaler.dll
@@ -27,7 +29,10 @@ P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\Magick.NET.Core.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\MicroCom.Runtime.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\SkiaSharp.dll
+P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\System.Configuration.ConfigurationManager.dll
+P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\System.Diagnostics.EventLog.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\System.IO.Pipelines.dll
+P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\System.Security.Cryptography.ProtectedData.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\Tmds.DBus.Protocol.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\runtimes\win-arm64\native\av_libglesv2.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\runtimes\win-x64\native\av_libglesv2.dll
@@ -57,6 +62,8 @@ P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
+P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
+P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\PCSX2Upscaler.csproj.AssemblyReference.cache
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\Avalonia\Resources.Inputs.cache
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\Avalonia\resources
@@ -64,6 +71,7 @@ P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\PCSX2Upscaler.AssemblyInfoInputs.cache
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\PCSX2Upscaler.AssemblyInfo.cs
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\PCSX2Upscaler.csproj.CoreCompileInputs.cache
+P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\PCSX2Upscaler.sourcelink.json
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\Avalonia\references
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\Avalonia\original.dll
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\Avalonia\original.pdb
@@ -74,11 +82,3 @@ P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\PCSX2Ups.B0EE2699.Up2Date
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\PCSX2Upscaler.genruntimeconfig.cache
 P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\ref\PCSX2Upscaler.dll
-P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\icon.ico
-P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\obj\Release\net8.0\PCSX2Upscaler.sourcelink.json
-P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\PCSX2Upscaler.dll.config
-P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\System.Configuration.ConfigurationManager.dll
-P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\System.Diagnostics.EventLog.dll
-P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\System.Security.Cryptography.ProtectedData.dll
-P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
-P:\Programmering\Visual Studio Projects\PCSX2Upscaler\PCSX2Upscaler\bin\Release\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
