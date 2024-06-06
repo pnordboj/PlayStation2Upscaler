@@ -70,6 +70,10 @@
             "Magick.NET-Q16-AnyCPU": {
               "target": "Package",
               "version": "[13.9.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

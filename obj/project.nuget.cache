@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zTmF24KrkKmh7zseow05CP5lnXlczpadec7DpJZqJeql1C8MboGLExZIne9XqEVJbKMdQ1nSzInHSElv5yTUyA==",
+  "dgSpecHash": "Iw3W6nGdnYbmJJnkhg6OFPcpod+TMIMt7Gppi8Cj5X3Gpxmu/wfA6dXVpI+Fdccg4SSwTrP9R2Ln+Eb82gpcpw==",
   "success": true,
   "projectFilePath": "P:\\Programmering\\Visual Studio Projects\\PCSX2Upscaler\\PCSX2Upscaler\\PCSX2Upscaler.csproj",
   "expectedPackageFiles": [
@@ -30,8 +30,11 @@
     "C:\\Users\\there\\.nuget\\packages\\skiasharp.nativeassets.webassembly\\2.88.7\\skiasharp.nativeassets.webassembly.2.88.7.nupkg.sha512",
     "C:\\Users\\there\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.7\\skiasharp.nativeassets.win32.2.88.7.nupkg.sha512",
     "C:\\Users\\there\\.nuget\\packages\\system.componentmodel.annotations\\4.5.0\\system.componentmodel.annotations.4.5.0.nupkg.sha512",
+    "C:\\Users\\there\\.nuget\\packages\\system.configuration.configurationmanager\\8.0.0\\system.configuration.configurationmanager.8.0.0.nupkg.sha512",
+    "C:\\Users\\there\\.nuget\\packages\\system.diagnostics.eventlog\\8.0.0\\system.diagnostics.eventlog.8.0.0.nupkg.sha512",
     "C:\\Users\\there\\.nuget\\packages\\system.io.pipelines\\6.0.0\\system.io.pipelines.6.0.0.nupkg.sha512",
     "C:\\Users\\there\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\there\\.nuget\\packages\\system.security.cryptography.protecteddata\\8.0.0\\system.security.cryptography.protecteddata.8.0.0.nupkg.sha512",
     "C:\\Users\\there\\.nuget\\packages\\tmds.dbus.protocol\\0.15.0\\tmds.dbus.protocol.0.15.0.nupkg.sha512"
   ],
   "logs": []
