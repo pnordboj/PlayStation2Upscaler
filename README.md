@@ -10,12 +10,12 @@ PCSX2 Upscaler is a graphical application designed to upscale texture files for 
 - **Output Folder Selection**: Choose the output folder where the upscaled textures will be saved.
 - **`waifu2x-caffe` Path Selection**: Specify the path to the `waifu2x-caffe` executable.
 - **Real-time Progress Updates**: Display progress, estimated time remaining, and estimated storage requirements.
-- **Start, Pause, and Stop**: Control the upscaling process with Start, Pause, and Stop buttons.
+- **Start and Stop**: Control the upscaling process with Start and Stop buttons.
 - **Terminal Output**: Option to display terminal output for detailed processing logs.
 
 ## Prerequisites
 
-- .NET SDK
+- .NET 8 SDK
 - AvaloniaUI
 - `waifu2x-caffe`
 
@@ -23,11 +23,11 @@ PCSX2 Upscaler is a graphical application designed to upscale texture files for 
 
 1. **Clone the Repository**:
     ```sh
-    git clone https://github.com/yourusername/PCSX2Upscaler.git
+    git clone https://github.com/pnordboj/PlayStation2Upscaler.git
     cd PCSX2Upscaler
     ```
 
-2. **Install .NET SDK**: Make sure you have the .NET SDK installed. You can download it from [here](https://dotnet.microsoft.com/download).
+2. **Install .NET 8 SDK**: Make sure you have the .NET 8 SDK installed. You can download it from [here](https://dotnet.microsoft.com/download).
 
 3. **Restore Dependencies**:
     ```sh
@@ -67,7 +67,6 @@ PCSX2 Upscaler is a graphical application designed to upscale texture files for 
     - Monitor the progress through the progress bar and the status text.
 
 6. **Pause/Resume Upscaling**:
-    - Click `Pause` to pause the upscaling process.
     - Click `Resume` to resume the upscaling process.
 
 7. **Stop Upscaling**:
@@ -75,22 +74,6 @@ PCSX2 Upscaler is a graphical application designed to upscale texture files for 
 
 8. **View Terminal Output**:
     - Check the "Show Terminal" checkbox to display the terminal output.
-
-## Example
-
-Here's a quick example of the application in action:
-
-1. **Select Input Folder**:
-   ![Select Input Folder](images/select_input_folder.png)
-
-2. **Select Output Folder**:
-   ![Select Output Folder](images/select_output_folder.png)
-
-3. **Select `waifu2x-caffe` Path**:
-   ![Select Waifu2x Path](images/select_waifu2x_path.png)
-
-4. **Start Upscaling**:
-   ![Start Upscaling](images/start_upscaling.png)
 
 ## Contributing
 
@@ -102,8 +85,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any questions or suggestions, feel free to contact us at [email@example.com](mailto:email@example.com).
-
----
-
-Thank you for using PCSX2 Upscaler! We hope it helps you enhance your gaming experience.
+For any questions or suggestions, feel free to contact us at [patricknj.dev@gmail.com](mailto:patricknj.dev@gmail.com).
