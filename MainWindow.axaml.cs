@@ -26,6 +26,7 @@ namespace PCSX2Upscaler
         private DispatcherTimer timer;
         private const int TerminalHeight = 200;
         private const int NormalHeight = 600;
+        private Stopwatch stopwatch;
 
         public MainWindow()
         {
@@ -36,7 +37,7 @@ namespace PCSX2Upscaler
             ValidatePrerequisites();
             SearchForWaifu2xExecutable();
         }
-        
+
         private void InitializeTimer()
         {
             timer = new DispatcherTimer
@@ -59,7 +60,7 @@ namespace PCSX2Upscaler
             if (!string.IsNullOrEmpty(result))
             {
                 FolderPathTextBox.Text = result;
-                StartFileWatcher(result);
+                LogToTerminal("Output folder set to: " + result);
             }
         }
 
@@ -71,9 +72,10 @@ namespace PCSX2Upscaler
             if (!string.IsNullOrEmpty(result))
             {
                 OutputPathTextBox.Text = result;
+                LogToTerminal("Output folder set to: " + result);
             }
         }
-        
+
         private async void Waifu2xBrowseButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFolderDialog
@@ -82,11 +84,12 @@ namespace PCSX2Upscaler
             };
             var result = await dialog.ShowAsync(this);
 
-            if (result != null && result.Length > 0)
+            if (!string.IsNullOrEmpty(result))
             {
                 Waifu2xPathTextBox.Text = result;
                 SaveSettings();
                 ValidatePrerequisites();
+                LogToTerminal("waifu2x-caffe folder set to: " + result);
             }
         }
 
@@ -105,10 +108,12 @@ namespace PCSX2Upscaler
             fileWatcher.Created += OnNewFileDetected;
             fileWatcher.Changed += OnNewFileDetected;
             fileWatcher.EnableRaisingEvents = true;
+            LogToTerminal("File watcher started for folder: " + folderPath);
         }
 
         private void OnNewFileDetected(object sender, FileSystemEventArgs e)
         {
+            LogToTerminal("New file detected: " + e.FullPath);
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 if (!processedFiles.Contains(e.FullPath) && !fileQueue.Contains(e.FullPath))
@@ -116,6 +121,7 @@ namespace PCSX2Upscaler
                     fileQueue.Enqueue(e.FullPath);
                     totalFiles++;
                     UpdateProgressDisplay();
+                    LogToTerminal("File enqueued for processing: " + e.FullPath);
                 }
             });
         }
@@ -131,13 +137,15 @@ namespace PCSX2Upscaler
                 return;
             }
 
+            StartFileWatcher(folderPath);
+
             string outputPath = OutputPathTextBox.Text;
             if (!Directory.Exists(outputPath))
             {
                 await Dispatcher.UIThread.InvokeAsync(() => StatusTextBlock.Text = "Please select a valid output folder.");
                 return;
             }
-            
+
             string waifu2xFolder = Waifu2xPathTextBox.Text;
             if (!Directory.Exists(waifu2xFolder))
             {
@@ -174,12 +182,14 @@ namespace PCSX2Upscaler
             cts = new CancellationTokenSource();
             isUpscaling = true;
             await Dispatcher.UIThread.InvokeAsync(() => StopButton.IsEnabled = true);
-            Stopwatch stopwatch = new Stopwatch();
+            stopwatch = new Stopwatch();
             stopwatch.Start();
+            timer.Start();
 
             await Task.Run(() => ContinuousUpscaleTexturesWithWaifu2x(outputPath, waifu2xFolder, stopwatch, cts.Token));
 
             stopwatch.Stop();
+            timer.Stop();
             isUpscaling = false;
             await Dispatcher.UIThread.InvokeAsync(() => StopButton.IsEnabled = false);
 
@@ -231,7 +241,7 @@ namespace PCSX2Upscaler
                         Dispatcher.UIThread.InvokeAsync(() => UpdateProgressDisplay());
                         continue; // Skip already upscaled image
                     }
-                    
+
                     string waifu2xPath = Path.Combine(waifu2xFolder, "waifu2x-caffe-cui.exe");
 
                     // Arguments for waifu2x-caffe
@@ -333,12 +343,19 @@ namespace PCSX2Upscaler
 
         private void UpdateTimeRemaining()
         {
-            double elapsedSeconds = timer.Interval.TotalSeconds;
-            double estimatedTotalTime = (elapsedSeconds / processedFileCount) * totalFiles;
-            double remainingSeconds = estimatedTotalTime - elapsedSeconds;
+            if (processedFileCount > 0 && totalFiles > 0)
+            {
+                double elapsedSeconds = stopwatch.Elapsed.TotalSeconds;
+                double estimatedTotalTime = (elapsedSeconds / processedFileCount) * totalFiles;
+                double remainingSeconds = estimatedTotalTime - elapsedSeconds;
 
-            TimeSpan remainingTime = TimeSpan.FromSeconds(remainingSeconds);
-            TimeTextBlock.Text = $"Estimated time remaining: {remainingTime:hh\\:mm\\:ss}";
+                TimeSpan remainingTime = TimeSpan.FromSeconds(remainingSeconds);
+                TimeTextBlock.Text = $"Estimated time remaining: {remainingTime:hh\\:mm\\:ss}";
+            }
+            else
+            {
+                TimeTextBlock.Text = "Estimated time remaining: 00:00:00";
+            }
         }
 
         private void ShowTerminalCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -352,8 +369,8 @@ namespace PCSX2Upscaler
             TerminalScrollViewer.IsVisible = false;
             this.Height -= TerminalHeight;
         }
-        
-                private void InitializeSettings()
+
+        private void InitializeSettings()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             if (config.AppSettings.Settings["FolderPath"] == null)
