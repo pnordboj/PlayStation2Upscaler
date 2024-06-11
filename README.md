@@ -16,35 +16,10 @@ PCSX2 Upscaler is a graphical application designed to upscale texture files for 
 ## Prerequisites
 
 - .NET 8 SDK
-- AvaloniaUI
-- `waifu2x-caffe`
-
-## How to Build
-
-1. **Clone the Repository**:
-    ```sh
-    git clone https://github.com/pnordboj/PlayStation2Upscaler.git
-    cd PCSX2Upscaler
-    ```
-
-2. **Install .NET 8 SDK**: Make sure you have the .NET 8 SDK installed. You can download it from [here](https://dotnet.microsoft.com/download).
-
-3. **Restore Dependencies**:
-    ```sh
-    dotnet restore
-    ```
-
-4. **Build the Project**:
-    ```sh
-    dotnet build
-    ```
-
-5. **Run the Application**:
-    ```sh
-    dotnet run
-    ```
 
 ## How to Use
+
+![image](Images/Application.png)
 
 1. **Launch the Application**:
     Run the application from your build directory.
