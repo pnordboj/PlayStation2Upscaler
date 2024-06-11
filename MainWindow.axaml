@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         x:Class="PCSX2Upscaler.MainWindow"
-        Title="PCSX2 Upscaler" Width="600" Height="750"
+        Title="PCSX2 Upscaler" Width="600" Height="950"
         Background="#2E2E2E">
 	<Window.Styles>
 		<Style Selector="TextBlock">
@@ -35,13 +35,23 @@
 		<TextBox Name="FolderPathTextBox" IsReadOnly="True" FontSize="16"/>
 		<Button Name="BrowseButton" Content="Browse..." Click="BrowseButton_Click"/>
 		
-		<TextBlock Text="Set output folder:" Margin="0,10,0,1" FontSize="20"/>
+		<TextBlock Text="Set output folder:" Margin="0,10,0,10" FontSize="20"/>
 		<TextBox Name="OutputPathTextBox" IsReadOnly="True" FontSize="16"/>
 		<Button Name="OutputBrowseButton" Content="Browse..." Click="OutputBrowseButton_Click"/>
+
+        <TextBlock Text="Upscaler Type:" Margin="0,10,0,10" FontSize="20"/>
+        <StackPanel Orientation="Horizontal">
+            <RadioButton Name="Waifu2xRadioButton" Content="Waifu2x" IsChecked="True" FontSize="16" Margin="0,0,10,0"/>
+            <RadioButton Name="ESRGRadioButton" Content="ESRGAN" FontSize="16"/>
+        </StackPanel>
 		
-		<TextBlock Text="Set waifu2x-caffe folder contanining the executable:" Margin="0,10,0,1" FontSize="20"/>
+		<TextBlock Text="Set waifu2x-caffe folder containing the executable:" Margin="0,10,0,10" FontSize="20"/>
 		<TextBox Name="Waifu2xPathTextBox" IsReadOnly="True" FontSize="16"/>
 		<Button Name="Waifu2xBrowseButton" Content="Browse..." Click="Waifu2xBrowseButton_Click" ToolTip.Tip="Select the folder where the Wifu2x-Caffe executable is located"/>
+        
+        <TextBlock Text="Set ESRGAN folder containing the executable:" Margin="0,10,0,10" FontSize="20"/>
+		<TextBox Name="ESRGANPathTextBox" IsReadOnly="True" FontSize="16"/>
+		<Button Name="ESRGANBrowseButton" Content="Browse..." Click="ESRGANBrowseButton_Click" ToolTip.Tip="Select the folder where the ESRGAN executable is located"/>
 		
 		<Button Name="UpscaleButton" Content="Upscale Textures" Click="UpscaleButton_Click" Margin="0,20,0,0"/>
 		<Button Name="StopButton" Content="Stop" Click="StopButton_Click" Margin="0,20,0,0" IsEnabled="False"/>

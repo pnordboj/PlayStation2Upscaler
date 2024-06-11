@@ -93,6 +93,23 @@ namespace PCSX2Upscaler
             }
         }
 
+        private async void ESRGANBrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFolderDialog
+            {
+                Title = "Select the folder where the ESRGAN executable is located",
+            };
+            var result = await dialog.ShowAsync(this);
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                ESRGANPathTextBox.Text = result;
+                SaveSettings();
+                ValidatePrerequisites();
+                LogToTerminal("ESRGAN folder set to: " + result);
+            }
+        }
+
         private void StartFileWatcher(string folderPath)
         {
             if (fileWatcher != null)
@@ -147,9 +164,17 @@ namespace PCSX2Upscaler
             }
 
             string waifu2xFolder = Waifu2xPathTextBox.Text;
-            if (!Directory.Exists(waifu2xFolder))
+            string esrganFolder = ESRGANPathTextBox.Text;
+
+            if (Waifu2xRadioButton.IsChecked == true && !Directory.Exists(waifu2xFolder))
             {
                 await Dispatcher.UIThread.InvokeAsync(() => StatusTextBlock.Text = "Please select a valid folder where the waifu2x-caffe executable is located.");
+                return;
+            }
+
+            if (ESRGRadioButton.IsChecked == true && !Directory.Exists(esrganFolder))
+            {
+                await Dispatcher.UIThread.InvokeAsync(() => StatusTextBlock.Text = "Please select a valid folder where the ESRGAN executable is located.");
                 return;
             }
 
@@ -186,7 +211,14 @@ namespace PCSX2Upscaler
             stopwatch.Start();
             timer.Start();
 
-            await Task.Run(() => ContinuousUpscaleTexturesWithWaifu2x(outputPath, waifu2xFolder, stopwatch, cts.Token));
+            if (Waifu2xRadioButton.IsChecked == true)
+            {
+                await Task.Run(() => ContinuousUpscaleTexturesWithWaifu2x(outputPath, waifu2xFolder, stopwatch, cts.Token));
+            }
+            else if (ESRGRadioButton.IsChecked == true)
+            {
+                await Task.Run(() => ContinuousUpscaleTexturesWithESRGAN(outputPath, esrganFolder, stopwatch, cts.Token));
+            }
 
             stopwatch.Stop();
             timer.Stop();
@@ -324,6 +356,113 @@ namespace PCSX2Upscaler
             });
         }
 
+        private void ContinuousUpscaleTexturesWithESRGAN(string outputPath, string esrganFolder, Stopwatch stopwatch, CancellationToken token)
+        {
+            while (true)
+            {
+                if (token.IsCancellationRequested)
+                {
+                    break;
+                }
+
+                if (fileQueue.TryDequeue(out var file))
+                {
+                    if (processedFiles.Contains(file))
+                    {
+                        continue; // Skip already processed file
+                    }
+
+                    string outputFile = Path.Combine(outputPath, Path.GetFileName(file));
+                    if (File.Exists(outputFile))
+                    {
+                        processedFiles.Add(file);
+                        processedFileCount++;
+                        Dispatcher.UIThread.InvokeAsync(() => UpdateProgressDisplay());
+                        continue; // Skip already upscaled image
+                    }
+
+                    string esrganPath = Path.Combine(esrganFolder, "realesrgan-ncnn-vulkan.exe");
+
+                    // Arguments for ESRGAN
+                    string arguments = $"-i \"{file}\" -o \"{outputFile}\" -n \"realesrgan-x4plus\"";
+
+                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    {
+                        FileName = esrganPath,
+                        Arguments = arguments,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        StandardOutputEncoding = Encoding.UTF8, // Ensure proper encoding
+                        StandardErrorEncoding = Encoding.UTF8   // Ensure proper encoding
+                    };
+
+                    using (Process process = new Process())
+                    {
+                        process.StartInfo = startInfo;
+                        process.Start();
+
+                        // Read standard output and standard error streams manually
+                        using (StreamReader reader = process.StandardOutput)
+                        {
+                            string output;
+                            while ((output = reader.ReadLine()) != null)
+                            {
+                                LogToTerminal(output);
+                            }
+                        }
+
+                        using (StreamReader reader = process.StandardError)
+                        {
+                            string error;
+                            while ((error = reader.ReadLine()) != null)
+                            {
+                                LogToTerminal(error);
+                            }
+                        }
+
+                        process.WaitForExit();
+
+                        if (process.ExitCode == 0)
+                        {
+                            Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                LogToTerminal($"Successfully processed: {file}");
+                            });
+                        }
+                        else
+                        {
+                            Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                LogToTerminal($"Error processing: {file}");
+                            });
+                        }
+                    }
+
+                    processedFiles.Add(file);
+                    processedFileCount++;
+                    double progress = (processedFileCount / (double)totalFiles) * 100;
+
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        ProgressBar.Value = progress;
+                        UpdateProgressDisplay();
+                    });
+                }
+                else
+                {
+                    Thread.Sleep(100); // Sleep for a short time to avoid busy waiting
+                }
+            }
+
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                StatusTextBlock.Text = isUpscaling ? "Upscaling complete!" : "Upscaling stopped.";
+                Process.Start("explorer.exe", outputPath);
+            });
+        }
+
         private void LogToTerminal(string message)
         {
             if (!string.IsNullOrEmpty(message))
@@ -385,6 +524,10 @@ namespace PCSX2Upscaler
             {
                 config.AppSettings.Settings.Add("Waifu2xPath", string.Empty);
             }
+            if (config.AppSettings.Settings["ESRGANPath"] == null)
+            {
+                config.AppSettings.Settings.Add("ESRGANPath", string.Empty);
+            }
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("userSettings");
         }
@@ -395,6 +538,7 @@ namespace PCSX2Upscaler
             config.AppSettings.Settings["FolderPath"].Value = FolderPathTextBox.Text;
             config.AppSettings.Settings["OutputPath"].Value = OutputPathTextBox.Text;
             config.AppSettings.Settings["Waifu2xPath"].Value = Waifu2xPathTextBox.Text;
+            config.AppSettings.Settings["ESRGANPath"].Value = ESRGANPathTextBox.Text;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("userSettings");
         }
@@ -404,13 +548,14 @@ namespace PCSX2Upscaler
             FolderPathTextBox.Text = ConfigurationManager.AppSettings["FolderPath"];
             OutputPathTextBox.Text = ConfigurationManager.AppSettings["OutputPath"];
             Waifu2xPathTextBox.Text = ConfigurationManager.AppSettings["Waifu2xPath"];
+            ESRGANPathTextBox.Text = ConfigurationManager.AppSettings["ESRGANPath"];
         }
 
         private void ValidatePrerequisites()
         {
             UpscaleButton.IsEnabled = !string.IsNullOrEmpty(FolderPathTextBox.Text) &&
                                       !string.IsNullOrEmpty(OutputPathTextBox.Text) &&
-                                      !string.IsNullOrEmpty(Waifu2xPathTextBox.Text);
+                                      (!string.IsNullOrEmpty(Waifu2xPathTextBox.Text) || !string.IsNullOrEmpty(ESRGANPathTextBox.Text));
         }
 
         private void SearchForWaifu2xExecutable()
